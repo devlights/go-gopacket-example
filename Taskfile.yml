@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - go run main.go
+  openlive:
+    desc: Run pcap.OpenLive() example
+    dir: cmd/openlive
+    cmds:
+      - go build
+      - sudo ./openlive
