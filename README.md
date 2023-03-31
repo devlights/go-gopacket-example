@@ -43,9 +43,8 @@ $ task openlive
 task: [openlive] go build
 task: [openlive] sudo ./openlive
 
-.
-.
-.
+
+[Packet capture will be displayed.]
 
 
 ```
