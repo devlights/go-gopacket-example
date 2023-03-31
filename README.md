@@ -6,18 +6,7 @@ Packet Capture with gopacket example by golang.
 
 The sources in this repository only work on Linux.
 
-## Environment
-
-```sh
-$ lsb_release -a
-No LSB modules are available.
-Distributor ID: Ubuntu
-Description:    Ubuntu 22.04.2 LTS
-Release:        22.04
-Codename:       jammy
-```
-
-## Requires
+## Requirements
 
 ### libpcap
 
@@ -37,6 +26,7 @@ $ go install github.com/go-task/task/v3/cmd/task@latest
 $ task --list
 task: Available tasks for this project:
 * default:        default (print all ifs)
+* fmtvet:         go fmt and go vet
 * openlive:       Run pcap.OpenLive() example
 
 $ task openlive

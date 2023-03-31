@@ -1,3 +1,4 @@
+// Package main is the example of pcap.FindAllDevs()
 package main
 
 import (

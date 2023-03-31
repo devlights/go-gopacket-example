@@ -1,3 +1,4 @@
+// Package main is the example of pcap.OpenLive()
 package main
 
 import (
@@ -26,11 +27,15 @@ func run() error {
 		device      = "eth0"
 		filter      = ""
 		snapshotLen = int32(1600)
-		promiscuous = true
+		promiscuous = false
 		timeout     = 1 * time.Second
 	)
 
+	defer func() { appLog.Println("DONE") }()
+
+	// --------------------------------------
 	// Open capture handle
+	// --------------------------------------
 	var (
 		handle *pcap.Handle
 		err    error
@@ -42,7 +47,9 @@ func run() error {
 	}
 	defer handle.Close()
 
+	// --------------------------------------
 	// Apply capture filter (optional)
+	// --------------------------------------
 	if filter != "" {
 		err = handle.SetBPFFilter(filter)
 		if err != nil {
@@ -50,14 +57,18 @@ func run() error {
 		}
 	}
 
+	// --------------------------------------
 	// Set signal handler
+	// --------------------------------------
 	var (
 		sigCh = make(chan os.Signal, 1)
 	)
 
 	signal.Notify(sigCh, os.Interrupt)
 
+	// --------------------------------------
 	// Make packet source and display.
+	// --------------------------------------
 	var (
 		dataSource   gopacket.PacketDataSource = handle
 		decoder      gopacket.Decoder          = handle.LinkType()
@@ -65,7 +76,6 @@ func run() error {
 		packetCh     <-chan gopacket.Packet    = packetSource.Packets()
 	)
 	appLog.Println("START")
-	defer func() { appLog.Println("DONE") }()
 
 LOOP:
 	for {
