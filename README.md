@@ -22,7 +22,7 @@ Codename:       jammy
 ### libpcap
 
 ```sh
-$ sudo apt install libpcap
+$ sudo apt install libpcap-dev
 ```
 
 ### [go-task](https://taskfile.dev/)
