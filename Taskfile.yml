@@ -11,6 +11,14 @@ tasks:
     cmds:
       - go build
       - sudo ./openlive
+  openoffline:
+    desc: Run pcap.OpenOffline() example
+    dir: cmd/openoffline
+    cmds:
+      - cmd: sudo timeout 3s tcpdump -i eth0 -w example.pcap 'tcp'
+        ignore_error: true
+      - go build
+      - sudo ./openoffline
   fmtvet:
     desc: go fmt and go vet
     cmds:
