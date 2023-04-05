@@ -14,6 +14,12 @@ The sources in this repository only work on Linux.
 $ sudo apt install libpcap-dev
 ```
 
+### tcpdump
+
+```sh
+$ sudo apt install tcpdump
+```
+
 ### [go-task](https://taskfile.dev/)
 
 ```sh
@@ -36,6 +42,17 @@ task: [openlive] sudo ./openlive
 
 [Packet capture will be displayed.]
 
+
+$ task openoffline
+task: [openoffline] sudo timeout 3s tcpdump -i eth0 -w example.pcap 'tcp'
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
+61 packets captured
+77 packets received by filter
+0 packets dropped by kernel
+task: [openoffline] go build
+task: [openoffline] sudo ./openoffline
+
+[Packet capture will be displayed.]
 
 ```
 

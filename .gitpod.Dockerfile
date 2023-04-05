@@ -8,7 +8,7 @@ ARG GO_VERSION="1.20.2"
 USER gitpod
 
 RUN sudo apt-get update -q && \
-    sudo apt-get install -yq libpcap-dev && \ 
+    sudo apt-get install -yq libpcap-dev tcpdump && \ 
     rm -rf ${GITPOD_HOME_TMP} && \
     mkdir -p ${GITPOD_HOME_TMP} && \
     cd ${GITPOD_HOME_TMP} && \
