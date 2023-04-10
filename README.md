@@ -54,6 +54,26 @@ task: [openoffline] sudo ./openoffline
 
 [Packet capture will be displayed.]
 
+$ task bpffilter
+task: [bpffilter] go build
+task: [bpffilter] sudo bash ./tcpdump.sh
+task: [bpffilter] bash ./ping.sh
+PING localhost(localhost (::1)) 56 data bytes
+64 bytes from localhost (::1): icmp_seq=1 ttl=64 time=0.018 ms
+tcpdump: listening on lo, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+64 bytes from localhost (::1): icmp_seq=2 ttl=64 time=0.031 ms
+64 bytes from localhost (::1): icmp_seq=3 ttl=64 time=0.046 ms
+task: [bpffilter] sudo bash ./kill.sh
+33 packets captured
+82 packets received by filter
+0 packets dropped by kernel
+task: [bpffilter] sleep 1
+task: [bpffilter] sudo ./bpffilter
+START
+
+[Packet capture will be displayed.]
+
+DONE
 ```
 
 ## REFERENCES
