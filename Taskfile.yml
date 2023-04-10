@@ -15,10 +15,20 @@ tasks:
     desc: Run pcap.OpenOffline() example
     dir: cmd/openoffline
     cmds:
+      - go build
       - cmd: sudo timeout 3s tcpdump -i eth0 -w example.pcap 'tcp'
         ignore_error: true
-      - go build
       - sudo ./openoffline
+  bpffilter:
+    desc: Run pcap.OpenLive() with BPF Filter
+    dir: cmd/bpffilter
+    cmds:
+      - go build
+      - cmd: sudo timeout 3s tcpdump -i lo -w example.pcap &
+        ignore_error: true
+      - cmd: timeout 3s ping localhost
+        ignore_error: true
+      - sudo ./bpffilter
   fmtvet:
     desc: go fmt and go vet
     cmds:
