@@ -1,2 +1,3 @@
 bpffilter
 *.pcap
+*.pid

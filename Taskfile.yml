@@ -20,14 +20,18 @@ tasks:
         ignore_error: true
       - sudo ./openoffline
   bpffilter:
-    desc: Run pcap.OpenLive() with BPF Filter
+    desc: Run pcap.OpenOffline() with BPF Filter
     dir: cmd/bpffilter
     cmds:
       - go build
-      - cmd: sudo timeout 3s tcpdump -i lo -w example.pcap &
+      - cmd: sudo bash ./tcpdump.sh
         ignore_error: true
-      - cmd: timeout 3s ping localhost
+      - cmd: bash ./ping.sh
         ignore_error: true
+      - cmd: sudo bash ./kill.sh
+        ignore_error: true
+      # tcpdumpがpcapファイルを出力する猶予を与える
+      - sleep 1
       - sudo ./bpffilter
   fmtvet:
     desc: go fmt and go vet
