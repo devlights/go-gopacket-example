@@ -6,12 +6,29 @@ Packet Capture with gopacket example by golang.
 
 The sources in this repository only work on Linux.
 
+## Environments
+
+```sh
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 22.04.2 LTS
+Release:        22.04
+Codename:       jammy
+```
+
 ## Requirements
 
 ### libpcap
 
 ```sh
 $ sudo apt install libpcap-dev
+```
+
+### netcat
+
+```sh
+$ sudo apt install netcat
 ```
 
 ### tcpdump
@@ -74,6 +91,129 @@ START
 [Packet capture will be displayed.]
 
 DONE
+
+
+$ task packet
+task: [packet] go build
+task: [packet] sudo bash ./app.sh
+task: [packet] sleep 1
+task: [packet] sudo bash ./server.sh
+task: [packet] sudo bash ./client.sh
+helloworldtask: [packet] sleep 3
+------------------------------
+[Capture Length] 74
+[Src           ] 127.0.0.1
+[Dst           ] 127.0.0.1
+[Protocol      ] TCP
+[SRC PORT      ] 45400
+[DST PORT      ] 22222(easyengine)
+[TCP FLAGS     ]
+>>> SYN=true
+>>> ACK=false
+>>> PSH=false
+>>> RST=false
+>>> FIN=false
+------------------------------
+------------------------------
+[Capture Length] 74
+[Src           ] 127.0.0.1
+[Dst           ] 127.0.0.1
+[Protocol      ] TCP
+[SRC PORT      ] 22222(easyengine)
+[DST PORT      ] 45400
+[TCP FLAGS     ]
+>>> SYN=true
+>>> ACK=true
+>>> PSH=false
+>>> RST=false
+>>> FIN=false
+------------------------------
+------------------------------
+[Capture Length] 66
+[Src           ] 127.0.0.1
+[Dst           ] 127.0.0.1
+[Protocol      ] TCP
+[SRC PORT      ] 45400
+[DST PORT      ] 22222(easyengine)
+[TCP FLAGS     ]
+>>> SYN=false
+>>> ACK=true
+>>> PSH=false
+>>> RST=false
+>>> FIN=false
+------------------------------
+------------------------------
+[Capture Length] 76
+[Src           ] 127.0.0.1
+[Dst           ] 127.0.0.1
+[Protocol      ] TCP
+[SRC PORT      ] 45400
+[DST PORT      ] 22222(easyengine)
+[TCP FLAGS     ]
+>>> SYN=false
+>>> ACK=true
+>>> PSH=true
+>>> RST=false
+>>> FIN=false
+[Payload       ] [104 101 108 108 111 119 111 114 108 100]
+------------------------------
+------------------------------
+[Capture Length] 66
+[Src           ] 127.0.0.1
+[Dst           ] 127.0.0.1
+[Protocol      ] TCP
+[SRC PORT      ] 22222(easyengine)
+[DST PORT      ] 45400
+[TCP FLAGS     ]
+>>> SYN=false
+>>> ACK=true
+>>> PSH=false
+>>> RST=false
+>>> FIN=false
+------------------------------
+------------------------------
+[Capture Length] 66
+[Src           ] 127.0.0.1
+[Dst           ] 127.0.0.1
+[Protocol      ] TCP
+[SRC PORT      ] 45400
+[DST PORT      ] 22222(easyengine)
+[TCP FLAGS     ]
+>>> SYN=false
+>>> ACK=true
+>>> PSH=false
+>>> RST=false
+>>> FIN=true
+------------------------------
+------------------------------
+[Capture Length] 66
+[Src           ] 127.0.0.1
+[Dst           ] 127.0.0.1
+[Protocol      ] TCP
+[SRC PORT      ] 22222(easyengine)
+[DST PORT      ] 45400
+[TCP FLAGS     ]
+>>> SYN=false
+>>> ACK=true
+>>> PSH=false
+>>> RST=false
+>>> FIN=true
+------------------------------
+------------------------------
+[Capture Length] 66
+[Src           ] 127.0.0.1
+[Dst           ] 127.0.0.1
+[Protocol      ] TCP
+[SRC PORT      ] 45400
+[DST PORT      ] 22222(easyengine)
+[TCP FLAGS     ]
+>>> SYN=false
+>>> ACK=true
+>>> PSH=false
+>>> RST=false
+>>> FIN=false
+------------------------------
+task: [packet] sudo bash ./kill.sh
 ```
 
 ## REFERENCES
@@ -81,3 +221,4 @@ DONE
 - [gopacket](https://pkg.go.dev/github.com/google/gopacket@v1.1.19)
 - [Sniffing packets in Go](https://medium.com/a-bit-off/sniffing-network-go-6753cae91d3f)
 - [gopacketでpcapを読み込む](https://mrtc0.hateblo.jp/entry/2016/03/19/232252)
+- [ncコマンドでサービスの接続疎通確認](https://qiita.com/chenglin/items/70f06e146db19de5a659)
