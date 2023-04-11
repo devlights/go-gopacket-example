@@ -19,6 +19,21 @@ tasks:
       - cmd: sudo timeout 3s tcpdump -i eth0 -w example.pcap 'tcp'
         ignore_error: true
       - sudo ./openoffline
+  packet:
+    desc: See gopacket.Packet structure info
+    dir: cmd/packet
+    cmds:
+      - go build
+      - cmd: sudo bash ./app.sh
+        ignore_error: true
+      - sleep 1
+      - cmd: sudo bash ./server.sh
+        ignore_error: true
+      - cmd: sudo bash ./client.sh
+        ignore_error: true
+      - sleep 3
+      - cmd: sudo bash ./kill.sh
+        ignore_error: true
   bpffilter:
     desc: Run pcap.OpenOffline() with BPF Filter
     dir: cmd/bpffilter
