@@ -25,7 +25,7 @@ Codename:       jammy
 $ sudo apt install libpcap-dev
 ```
 
-### netcat
+### nc (netcat)
 
 ```sh
 $ sudo apt install netcat
