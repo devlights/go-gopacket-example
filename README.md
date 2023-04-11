@@ -15,6 +15,10 @@ Distributor ID: Ubuntu
 Description:    Ubuntu 22.04.2 LTS
 Release:        22.04
 Codename:       jammy
+
+
+$ go version
+go version go1.20.3 linux/amd64
 ```
 
 ## Requirements
@@ -48,9 +52,13 @@ $ go install github.com/go-task/task/v3/cmd/task@latest
 ```sh
 $ task --list
 task: Available tasks for this project:
-* default:        default (print all ifs)
-* fmtvet:         go fmt and go vet
-* openlive:       Run pcap.OpenLive() example
+* bpffilter:         Run pcap.OpenOffline() with BPF Filter
+* default:           default (print all ifs)
+* fmtvet:            go fmt and go vet
+* openlive:          Run pcap.OpenLive() example
+* openoffline:       Run pcap.OpenOffline() example
+* packet:            See gopacket.Packet structure info
+
 
 $ task openlive
 task: [openlive] go build
@@ -70,6 +78,8 @@ task: [openoffline] go build
 task: [openoffline] sudo ./openoffline
 
 [Packet capture will be displayed.]
+
+
 
 $ task bpffilter
 task: [bpffilter] go build
@@ -91,6 +101,7 @@ START
 [Packet capture will be displayed.]
 
 DONE
+
 
 
 $ task packet
