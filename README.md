@@ -63,6 +63,7 @@ task: Available tasks for this project:
 * fmtvet:                   go fmt and go vet
 * layertype-arp:            See *layers.ARP info
 * layertype-ethernet:       See *layers.Ethernet info
+* layertype-icmpv4:         See *layers.ICMPv4 info
 * layertype-ipv4:           See *layers.IPv4 info
 * openlive:                 Run pcap.OpenLive() example
 * openoffline:              Run pcap.OpenOffline() example
@@ -294,6 +295,31 @@ START
 [Src IP        ] 10.0.5.2
 [Dst IP        ] 192.168.39.75
 DONE 
+
+
+$ task layertype-icmpv4
+task: [layertype-icmpv4] go build
+task: [layertype-icmpv4] sudo bash ./ping.sh &
+task: [layertype-icmpv4] sudo ./icmpv4
+START
+PING  (127.0.0.1) 56(84) bytes of data.
+64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.018 ms
+[Seq     ] 1
+[Type    ] 8
+[Code    ] 0
+[Req/Rep ] ICMP Echo Request
+[Checksum] 20183
+[Seq     ] 1
+[Type    ] 0
+[Code    ] 0
+[Req/Rep ] ICMP Echo Reply
+[Checksum] 22231
+64 bytes from localhost (127.0.0.1): icmp_seq=2 ttl=64 time=0.028 ms
+
+---  ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1020ms
+rtt min/avg/max/mdev = 0.018/0.023/0.028/0.005 ms
+DONE
 ```
 
 ## REFERENCES

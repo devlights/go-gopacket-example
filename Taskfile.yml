@@ -38,6 +38,13 @@ tasks:
     cmds:
       - go build
       - sudo ./ipv4
+  layertype-icmpv4:
+    desc: See *layers.ICMPv4 info
+    dir: cmd/layertype/icmpv4
+    cmds:
+      - go build
+      - sudo bash ./ping.sh &
+      - sudo ./icmpv4
   packet:
     desc: See gopacket.Packet structure info
     dir: cmd/packet
