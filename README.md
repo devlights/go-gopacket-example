@@ -29,16 +29,22 @@ go version go1.20.3 linux/amd64
 $ sudo apt install libpcap-dev
 ```
 
-### nc (netcat)
+### nc (netcat) (optional)
 
 ```sh
 $ sudo apt install netcat
 ```
 
-### tcpdump
+### tcpdump (optional)
 
 ```sh
 $ sudo apt install tcpdump
+```
+
+### arp-scan (optional)
+
+```sh
+$ sudo apt install arp-scan
 ```
 
 ### [go-task](https://taskfile.dev/)
@@ -55,6 +61,7 @@ task: Available tasks for this project:
 * bpffilter:                Run pcap.OpenOffline() with BPF Filter
 * default:                  default (print all ifs)
 * fmtvet:                   go fmt and go vet
+* layertype-arp:            See *layers.ARP info
 * layertype-ethernet:       See *layers.Ethernet info
 * openlive:                 Run pcap.OpenLive() example
 * openoffline:              Run pcap.OpenOffline() example
@@ -253,6 +260,24 @@ START
 [Ethernet type] IPv4
 DONE
 
+
+$ task layertype-arp
+task: [layertype-arp] go build
+task: [layertype-arp] sudo bash ./arp-scan.sh &
+task: [layertype-arp] sudo ./arp
+START
+Interface: eth0, type: EN10MB, MAC: c2:88:65:43:bc:ed, IPv4: 10.0.5.2
+Starting arp-scan 1.9.7 with 4 hosts (https://github.com/royhills/arp-scan)
+10.0.5.1        42:6f:a6:72:06:80       (Unknown: locally administered)
+[Operation    ] 1
+[Src Hw Addr  ] [194 136 101 76 188 237]
+[Src Prot Addr] [10 0 2 6]
+[Dst Hw Addr  ] [0 0 0 0 0 0]
+[Dst Prot Addr] [10 3 5 0]
+
+1 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.9.7: 4 hosts scanned in 1.443 seconds (2.77 hosts/sec). 1 responded
+DONE
 ```
 
 ## REFERENCES
