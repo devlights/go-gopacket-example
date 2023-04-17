@@ -50,6 +50,7 @@ $ go install github.com/go-task/task/v3/cmd/task@latest
 ## How to run
 
 ```sh
+$ task --list
 task: Available tasks for this project:
 * bpffilter:                Run pcap.OpenOffline() with BPF Filter
 * default:                  default (print all ifs)
