@@ -286,3 +286,4 @@ DONE
 - [Sniffing packets in Go](https://medium.com/a-bit-off/sniffing-network-go-6753cae91d3f)
 - [gopacketでpcapを読み込む](https://mrtc0.hateblo.jp/entry/2016/03/19/232252)
 - [ncコマンドでサービスの接続疎通確認](https://qiita.com/chenglin/items/70f06e146db19de5a659)
+- [IPが分からないオンプレミスをコマンドラインから調べる。(arp-scan)](https://qiita.com/iganari/items/7be4681ecfa5cff76feb)
