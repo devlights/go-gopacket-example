@@ -32,6 +32,12 @@ tasks:
       - go build
       - sudo bash ./arp-scan.sh &
       - sudo ./arp
+  layertype-ipv4:
+    desc: See *layers.IPv4 info
+    dir: cmd/layertype/ipv4
+    cmds:
+      - go build
+      - sudo ./ipv4
   packet:
     desc: See gopacket.Packet structure info
     dir: cmd/packet
