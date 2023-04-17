@@ -63,6 +63,7 @@ task: Available tasks for this project:
 * fmtvet:                   go fmt and go vet
 * layertype-arp:            See *layers.ARP info
 * layertype-ethernet:       See *layers.Ethernet info
+* layertype-ipv4:           See *layers.IPv4 info
 * openlive:                 Run pcap.OpenLive() example
 * openoffline:              Run pcap.OpenOffline() example
 * packet:                   See gopacket.Packet structure info
@@ -278,6 +279,21 @@ Starting arp-scan 1.9.7 with 4 hosts (https://github.com/royhills/arp-scan)
 1 packets received by filter, 0 packets dropped by kernel
 Ending arp-scan 1.9.7: 4 hosts scanned in 1.443 seconds (2.77 hosts/sec). 1 responded
 DONE
+
+
+$ task layertype-ipv4
+task: [layertype-ipv4] go build
+task: [layertype-ipv4] sudo ./ipv4
+START
+[Version       ] 4
+[IHL           ] 5 words -> 160 bits -> 20 bytes
+[Length        ] 81
+[Payload Length] 61
+[TTL           ] 64
+[Protocol      ] TCP
+[Src IP        ] 10.0.5.2
+[Dst IP        ] 192.168.39.75
+DONE 
 ```
 
 ## REFERENCES
