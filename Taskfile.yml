@@ -19,6 +19,12 @@ tasks:
       - cmd: sudo timeout 3s tcpdump -i eth0 -w example.pcap 'tcp'
         ignore_error: true
       - sudo ./openoffline
+  layertype-ethernet:
+    desc: See *layers.Ethernet info
+    dir: cmd/layertype/ethernet
+    cmds:
+      - go build
+      - sudo ./ethernet
   packet:
     desc: See gopacket.Packet structure info
     dir: cmd/packet

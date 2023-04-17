@@ -50,14 +50,14 @@ $ go install github.com/go-task/task/v3/cmd/task@latest
 ## How to run
 
 ```sh
-$ task --list
 task: Available tasks for this project:
-* bpffilter:         Run pcap.OpenOffline() with BPF Filter
-* default:           default (print all ifs)
-* fmtvet:            go fmt and go vet
-* openlive:          Run pcap.OpenLive() example
-* openoffline:       Run pcap.OpenOffline() example
-* packet:            See gopacket.Packet structure info
+* bpffilter:                Run pcap.OpenOffline() with BPF Filter
+* default:                  default (print all ifs)
+* fmtvet:                   go fmt and go vet
+* layertype-ethernet:       See *layers.Ethernet info
+* openlive:                 Run pcap.OpenLive() example
+* openoffline:              Run pcap.OpenOffline() example
+* packet:                   See gopacket.Packet structure info
 
 
 $ task openlive
@@ -225,6 +225,33 @@ helloworldtask: [packet] sleep 3
 >>> FIN=false
 ------------------------------
 task: [packet] sudo bash ./kill.sh
+
+
+
+$ task layertype-ethernet
+task: [layertype-ethernet] go build
+task: [layertype-ethernet] sudo ./ethernet
+START
+[Src MAC      ] 16:xx:42:44:xx:cd
+[Dst MAC      ] 7e:bf:24:xx:3e:90
+[Ethernet type] IPv4
+[Src MAC      ] 7e:bf:24:xx:3e:90
+[Dst MAC      ] 16:xx:42:44:2e:cd
+[Ethernet type] IPv4
+[Src MAC      ] 16:xx:42:44:2e:cd
+[Dst MAC      ] 7e:bf:24:xx:3e:90
+[Ethernet type] IPv4
+[Src MAC      ] 7e:bf:24:xx:3e:90
+[Dst MAC      ] 16:xx:42:44:2e:cd
+[Ethernet type] IPv4
+[Src MAC      ] 7e:bf:24:xx:3e:90
+[Dst MAC      ] 16:xx:42:44:2e:cd
+[Ethernet type] IPv4
+[Src MAC      ] 7e:bf:24:xx:3e:90
+[Dst MAC      ] 16:xx:42:44:2e:cd
+[Ethernet type] IPv4
+DONE
+
 ```
 
 ## REFERENCES
