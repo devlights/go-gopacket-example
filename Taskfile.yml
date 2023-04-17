@@ -25,6 +25,13 @@ tasks:
     cmds:
       - go build
       - sudo ./ethernet
+  layertype-arp:
+    desc: See *layers.ARP info
+    dir: cmd/layertype/arp
+    cmds:
+      - go build
+      - sudo bash ./arp-scan.sh &
+      - sudo ./arp
   packet:
     desc: See gopacket.Packet structure info
     dir: cmd/packet
