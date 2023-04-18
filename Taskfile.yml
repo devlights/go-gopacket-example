@@ -64,6 +64,7 @@ tasks:
     desc: Run pcap.OpenOffline() with BPF Filter
     dir: cmd/bpffilter
     cmds:
+      - rm -rf *.pid *.pcap
       - go build
       - cmd: sudo bash ./tcpdump.sh
         ignore_error: true
