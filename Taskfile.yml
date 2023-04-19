@@ -52,7 +52,7 @@ tasks:
       - sudo bash ./ping.sh &
       - sudo ./icmpv4
   packet:
-    desc: See gopacket.Packet structure info
+    desc: See *pcap.Packet structure info
     dir: cmd/packet
     cmds:
       - go build

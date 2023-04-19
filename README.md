@@ -65,9 +65,10 @@ task: Available tasks for this project:
 * layertype-ethernet:       See *layers.Ethernet info
 * layertype-icmpv4:         See *layers.ICMPv4 info
 * layertype-ipv4:           See *layers.IPv4 info
+* layertype-tcp:            See *layers.TCP info
 * openlive:                 Run pcap.OpenLive() example
 * openoffline:              Run pcap.OpenOffline() example
-* packet:                   See gopacket.Packet structure info
+* packet:                   See *pcap.Packet structure info
 
 
 $ task openlive
@@ -319,6 +320,52 @@ PING  (127.0.0.1) 56(84) bytes of data.
 ---  ping statistics ---
 2 packets transmitted, 2 received, 0% packet loss, time 1020ms
 rtt min/avg/max/mdev = 0.018/0.023/0.028/0.005 ms
+DONE
+
+
+$ task layertype-tcp
+task: [layertype-tcp] go build
+task: [layertype-tcp] sudo ./tcp
+START
+[Src Port       ] 51190
+[Dst Port       ] 443(https)
+[Seq Number     ] 771501779
+[Ack Number     ] 1030112796
+[Window Size    ] 331
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] true
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 4529
+[Urgent Pointer ] 0
+----------------
+[Src Port       ] 51190
+[Dst Port       ] 443(https)
+[Seq Number     ] 771501819
+[Ack Number     ] 1030112796
+[Window Size    ] 331
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] true
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 4686
+[Urgent Pointer ] 0
+----------------
+[Src Port       ] 443(https)
+[Dst Port       ] 51190
+[Seq Number     ] 1030112796
+[Ack Number     ] 771501819
+[Window Size    ] 1962
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 10449
+[Urgent Pointer ] 0
+----------------
 DONE
 ```
 
