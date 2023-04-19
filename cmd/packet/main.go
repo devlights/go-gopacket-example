@@ -93,7 +93,7 @@ LOOP:
 func see(p gopacket.Packet) {
 	// ダンプ出力（各レイヤー毎の詳細も見れる）
 	//appLog.Printf("[Dump] %v", p.Dump())
-	// データ (各レイヤー毎のフルバケットデータが見れる)
+	// データ (各レイヤー毎のフルパケットデータが見れる)
 	//appLog.Printf("[Data] %v", p.Data())
 
 	appLog.Println("------------------------------")
