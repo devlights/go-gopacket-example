@@ -38,6 +38,12 @@ tasks:
     cmds:
       - go build
       - sudo ./ipv4
+  layertype-tcp:
+    desc: See *layers.TCP info
+    dir: cmd/layertype/tcp
+    cmds:
+      - go build
+      - sudo ./tcp
   layertype-icmpv4:
     desc: See *layers.ICMPv4 info
     dir: cmd/layertype/icmpv4
