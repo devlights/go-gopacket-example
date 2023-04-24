@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"time"
 
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
@@ -28,7 +29,7 @@ func run() error {
 		filter      = "tcp"
 		snapshotLen = int32(1600)
 		promiscuous = false
-		timeout     = pcap.BlockForever
+		timeout     = 1 * time.Second
 	)
 
 	defer func() { appLog.Println("DONE") }()

@@ -44,6 +44,21 @@ tasks:
     cmds:
       - go build
       - sudo ./tcp
+  layertype-udp:
+    desc: See *layers.UDP info
+    dir: cmd/layertype/udp
+    cmds:
+      - go build
+      - cmd: sudo bash ./app.sh
+        ignore_error: true
+      - sleep 1
+      - cmd: sudo bash ./server.sh
+        ignore_error: true
+      - cmd: sudo bash ./client.sh
+        ignore_error: true
+      - sleep 3
+      - cmd: sudo bash ./kill.sh
+        ignore_error: true
   layertype-icmpv4:
     desc: See *layers.ICMPv4 info
     dir: cmd/layertype/icmpv4
