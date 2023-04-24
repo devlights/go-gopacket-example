@@ -1,4 +1,4 @@
-// Package main is the example of *layers.TCP
+// Package main is the example of *layers.UDP
 package main
 
 import (
@@ -26,8 +26,8 @@ func main() {
 
 func run() error {
 	const (
-		device      = "eth0"
-		filter      = "tcp and port 443"
+		device      = "lo"
+		filter      = "udp and port 22222"
 		snapshotLen = int32(1600)
 		promiscuous = false
 		timeout     = 1 * time.Second
@@ -77,7 +77,7 @@ func run() error {
 		decoder       gopacket.Decoder          = handle.LinkType()
 		packetSource  *gopacket.PacketSource    = gopacket.NewPacketSource(dataSource, decoder)
 		packetCh      <-chan gopacket.Packet    = packetSource.Packets()
-		first3Packets                           = chans.Take(doneCh, packetCh, 3)
+		first1Packets                           = chans.Take(doneCh, packetCh, 3)
 	)
 	appLog.Println("START")
 
@@ -87,7 +87,7 @@ LOOP:
 		case <-sigCh:
 			close(doneCh)
 			break LOOP
-		case p, ok := <-first3Packets:
+		case p, ok := <-first1Packets:
 			if !ok {
 				break LOOP
 			}
@@ -100,24 +100,18 @@ LOOP:
 }
 
 func see(p gopacket.Packet) {
-	tcpLayer := p.Layer(layers.LayerTypeTCP)
-	if tcpLayer == nil {
+	udpLayer := p.Layer(layers.LayerTypeUDP)
+	if udpLayer == nil {
 		return
 	}
 
-	tcp := tcpLayer.(*layers.TCP)
+	udp := udpLayer.(*layers.UDP)
 
-	appLog.Printf("[Src Port       ] %v", tcp.SrcPort)
-	appLog.Printf("[Dst Port       ] %v", tcp.DstPort)
-	appLog.Printf("[Seq Number     ] %v", tcp.Seq)
-	appLog.Printf("[Ack Number     ] %v", tcp.Ack)
-	appLog.Printf("[Window Size    ] %v", tcp.Window)
-	appLog.Printf("[TCP Flags - SYN] %v", tcp.SYN)
-	appLog.Printf("[TCP Flags - ACK] %v", tcp.ACK)
-	appLog.Printf("[TCP Flags - PSH] %v", tcp.PSH)
-	appLog.Printf("[TCP Flags - RST] %v", tcp.RST)
-	appLog.Printf("[TCP Flags - FIN] %v", tcp.FIN)
-	appLog.Printf("[Checksum       ] %v", tcp.Checksum)
-	appLog.Printf("[Urgent Pointer ] %v", tcp.Urgent)
+	appLog.Printf("[Src Port       ] %v", udp.SrcPort)
+	appLog.Printf("[Dst Port       ] %v", udp.DstPort)
+	appLog.Printf("[Length         ] %v", udp.Length)
+	appLog.Printf("[Payload        ] %v", udp.Payload)
+	appLog.Printf("[Payload(decode)] %v", string(udp.Payload))
+	appLog.Printf("[Checksum       ] %v", udp.Checksum)
 	appLog.Println("----------------")
 }
