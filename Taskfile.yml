@@ -19,6 +19,19 @@ tasks:
       - cmd: sudo timeout 3s tcpdump -i eth0 -w example.pcap 'tcp'
         ignore_error: true
       - sudo ./openoffline
+  layertype-app:
+    desc: See gopacket.Packet.ApplicationLayer() info
+    dir: cmd/layertype/app
+    cmds:
+      - go build
+      - sudo bash ./tcpdump.sh
+      - sudo bash ./server.sh
+      - sleep 1
+      - sudo bash ./client.sh
+      - sleep 3
+      - sudo bash ./kill.sh
+      - sleep 1
+      - sudo ./app
   layertype-ethernet:
     desc: See *layers.Ethernet info
     dir: cmd/layertype/ethernet
