@@ -77,7 +77,7 @@ func run() error {
 		decoder       gopacket.Decoder          = handle.LinkType()
 		packetSource  *gopacket.PacketSource    = gopacket.NewPacketSource(dataSource, decoder)
 		packetCh      <-chan gopacket.Packet    = packetSource.Packets()
-		first1Packets                           = chans.Take(doneCh, packetCh, 3)
+		first1Packets                           = chans.Take(doneCh, packetCh, 1)
 	)
 	appLog.Println("START")
 
