@@ -58,6 +58,7 @@ $ go install github.com/go-task/task/v3/cmd/task@latest
 ```sh
 $ task --list
 task: Available tasks for this project:
+* applayer-http:            See HTTP info
 * bpffilter:                Run pcap.OpenOffline() with BPF Filter
 * default:                  default (print all ifs)
 * fmtvet:                   go fmt and go vet
@@ -417,6 +418,139 @@ START
 [TCP Layer      ][Contents] goroutine
 ----------------
 DONE
+
+
+$ task applayer-http
+task: [applayer-http] go build -o webserver server/main.go
+task: [applayer-http] go build -o http main.go
+task: [applayer-http] ./webserver &
+task: [applayer-http] sudo ./http &
+task: [applayer-http] sleep 1
+START
+task: [applayer-http] curl --silent http://localhost:12345/ > /dev/null
+task: [applayer-http] sleep 3
+[Src Port       ] 38220
+[Dst Port       ] 12345(italk)
+[Seq Number     ] 3929104362
+[Ack Number     ] 0
+[Window Size    ] 43690
+[TCP Flags - SYN] true
+[TCP Flags - ACK] false
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65072
+[Urgent Pointer ] 0
+------------------------------------
+[Src Port       ] 12345(italk)
+[Dst Port       ] 38220
+[Seq Number     ] 3265036388
+[Ack Number     ] 3929104363
+[Window Size    ] 43690
+[TCP Flags - SYN] true
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65072
+[Urgent Pointer ] 0
+------------------------------------
+[Src Port       ] 38220
+[Dst Port       ] 12345(italk)
+[Seq Number     ] 3929104363
+[Ack Number     ] 3265036389
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+HTTP Method: GET
+HTTP URL: /
+HTTP Protocol: HTTP/1.1
+HTTP Headers:
+  User-Agent: curl/7.81.0
+  Accept: */*
+------------------------------------
+[Src Port       ] 12345(italk)
+[Dst Port       ] 38220
+[Seq Number     ] 3265036389
+[Ack Number     ] 3929104442
+[Window Size    ] 341
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+HTTP Status Code: 200
+HTTP Protocol: HTTP/1.1
+HTTP Headers:
+  Date: Sun, 28 May 2023 16:33:50 GMT
+  Content-Length: 11
+  Content-Type: text/plain; charset=utf-8
+BODY: helloworld
+
+------------------------------------
+[Src Port       ] 38220
+[Dst Port       ] 12345(italk)
+[Seq Number     ] 3929104442
+[Ack Number     ] 3265036517
+[Window Size    ] 341
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[Src Port       ] 38220
+[Dst Port       ] 12345(italk)
+[Seq Number     ] 3929104442
+[Ack Number     ] 3265036517
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] true
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[Src Port       ] 12345(italk)
+[Dst Port       ] 38220
+[Seq Number     ] 3265036517
+[Ack Number     ] 3929104443
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] true
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[Src Port       ] 38220
+[Dst Port       ] 12345(italk)
+[Seq Number     ] 3929104443
+[Ack Number     ] 3265036518
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+task: [applayer-http] pkill webserver
+task: [applayer-http] sudo pkill http
 ```
 
 ## REFERENCES

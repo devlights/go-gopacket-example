@@ -88,7 +88,7 @@ tasks:
       - ./webserver &
       - sudo ./http &
       - sleep 1
-      - curl http://localhost:12345/
+      - curl --silent http://localhost:12345/ > /dev/null
       - sleep 3
       - pkill webserver
       - sudo pkill http
