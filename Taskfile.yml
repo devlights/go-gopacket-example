@@ -79,6 +79,19 @@ tasks:
       - go build
       - sudo bash ./ping.sh &
       - sudo ./icmpv4
+  applayer-http:
+    desc: See HTTP info
+    dir: cmd/applayer/http
+    cmds:
+      - go build -o webserver server/main.go
+      - go build -o http main.go
+      - ./webserver &
+      - sudo ./http &
+      - sleep 1
+      - curl --silent http://localhost:12345/ > /dev/null
+      - sleep 3
+      - pkill webserver
+      - sudo pkill http
   packet:
     desc: See *pcap.Packet structure info
     dir: cmd/packet
