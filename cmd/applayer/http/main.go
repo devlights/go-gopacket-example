@@ -107,11 +107,7 @@ func see(p gopacket.Packet) error {
 	//
 	// レイヤーを確認
 	//
-	var (
-		tcpLayer gopacket.Layer
-	)
-
-	tcpLayer = p.Layer(layers.LayerTypeTCP)
+	tcpLayer := p.Layer(layers.LayerTypeTCP)
 	if tcpLayer == nil {
 		return nil
 	}
@@ -150,7 +146,7 @@ func see(p gopacket.Packet) error {
 	)
 	defer func() { appLog.Println("------------------------------------") }()
 
-	if isRequest(&payloadStr) {
+	if isRequest(payloadStr) {
 		//
 		// HTTPリクエスト
 		//
@@ -174,7 +170,7 @@ func see(p gopacket.Packet) error {
 		}
 	}
 
-	if isResponse(&payloadStr) {
+	if isResponse(payloadStr) {
 		//
 		// HTTPレスポンス
 		//
@@ -209,20 +205,19 @@ func see(p gopacket.Packet) error {
 	return nil
 }
 
-func isResponse(s *string) bool {
-	return strings.HasPrefix(*s, "HTTP")
+func isResponse(s string) bool {
+	return strings.HasPrefix(s, "HTTP")
 }
 
-func isRequest(s *string) bool {
+func isRequest(s string) bool {
 	var (
 		methods = []string{
 			"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "CONNECT", "PATCH",
 		}
-		target = *s
 	)
 
 	for _, method := range methods {
-		if strings.HasPrefix(target, method) {
+		if strings.HasPrefix(s, method) {
 			return true
 		}
 	}
