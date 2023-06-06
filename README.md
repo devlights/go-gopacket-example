@@ -47,6 +47,12 @@ $ sudo apt install tcpdump
 $ sudo apt install arp-scan
 ```
 
+### nslookup or dig (optional)
+
+```sh
+$ sudo apt install dnsutils
+```
+
 ### [go-task](https://taskfile.dev/)
 
 ```sh
@@ -551,6 +557,57 @@ BODY: helloworld
 ------------------------------------
 task: [applayer-http] pkill webserver
 task: [applayer-http] sudo pkill http
+
+
+
+$ task applayer-dns
+task: [applayer-dns] go build -o dns main.go
+task: [applayer-dns] sudo ./dns &
+START
+task: [applayer-dns] dig +noall google.com
+[Src Port       ] 45271
+[Dst Port       ] 53(domain)
+[Length         ] 59
+[Checksum       ] 4432
+[DNS Questions]
+        ;google.com.    IN       A
+------------------------------------
+[Src Port       ] 53(domain)
+[Dst Port       ] 45271
+[Length         ] 63
+[Checksum       ] 27399
+[DNS Questions]
+        ;google.com.    IN       A
+[DNS Answers]
+        google.com.     166     IN      A       142.250.69.206
+------------------------------------
+task: [applayer-dns] sudo pkill dns
+
+
+
+$ task applayer-dnssec
+task: [applayer-dnssec] go build -o dnssec main.go
+task: [applayer-dnssec] sudo ./dnssec &
+START
+task: [applayer-dnssec] dig +noall +dnssec whitehouse.gov
+[Src Port       ] 56674
+[Dst Port       ] 53(domain)
+[Length         ] 63
+[Checksum       ] 4436
+[DNS Questions]
+        ;whitehouse.gov.        IN       A
+------------------------------------
+[Src Port       ] 53(domain)
+[Dst Port       ] 56674
+[Length         ] 177
+[Checksum       ] 64587
+[DNS Questions]
+        ;whitehouse.gov.        IN       A
+[DNS Answers]
+        [A     ] whitehouse.gov.        134     IN      A       192.0.66.168
+        [RRSIG ] whitehouse.gov.        134     IN      RRSIG   A 13 2 300 20230608100202 20230605090202 45139 whitehouse.gov. hw/Fuk0UJltdTPt4btjWS6iOfPSHgmKFTULfigQS5unhJFkYbRViH+76FopFvBDZai6nihM5ycSufheKXhWjqQ==
+------------------------------------
+task: [applayer-dnssec] sudo pkill dnssec
 ```
 
 ## REFERENCES
@@ -560,3 +617,5 @@ task: [applayer-http] sudo pkill http
 - [gopacketでpcapを読み込む](https://mrtc0.hateblo.jp/entry/2016/03/19/232252)
 - [ncコマンドでサービスの接続疎通確認](https://qiita.com/chenglin/items/70f06e146db19de5a659)
 - [IPが分からないオンプレミスをコマンドラインから調べる。(arp-scan)](https://qiita.com/iganari/items/7be4681ecfa5cff76feb)
+- [digコマンドを使ってみよう](https://zenn.dev/koyamaso/books/cbc1f9f136634c/viewer/d7d05e)
+- [4.5.9. DNSSEC における dig の使用](https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/7/html/security_guide/sec-security_guide-using-dig-with-dnssec)
