@@ -98,10 +98,25 @@ tasks:
     cmds:
       - go build -o dns main.go
       - sudo ./dns &
-      - sleep 1
+      - cmd: sleep 1
+        silent: true    
       - dig +noall google.com
-      - sleep 3
+      - cmd: sleep 3
+        silent: true
       - sudo pkill dns
+  applayer-dnssec:
+    desc: See DNSSEC info
+    dir: cmd/applayer/dnssec
+    cmds:
+      - go build -o dnssec main.go
+      - sudo ./dnssec &
+      - cmd: sleep 1
+        silent: true
+        # https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/7/html/security_guide/sec-security_guide-using-dig-with-dnssec
+      - dig +noall +dnssec whitehouse.gov
+      - cmd: sleep 3
+        silent: true
+      - sudo pkill dnssec
   packet:
     desc: See *pcap.Packet structure info
     dir: cmd/packet

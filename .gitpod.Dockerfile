@@ -8,7 +8,7 @@ ARG GO_VERSION="1.20.4"
 USER gitpod
 
 RUN sudo apt-get update -q && \
-    sudo apt-get install -yq libpcap-dev tcpdump netcat arp-scan && \ 
+    sudo apt-get install -yq libpcap-dev tcpdump netcat arp-scan dnsutils && \ 
     rm -rf ${GITPOD_HOME_TMP} && \
     mkdir -p ${GITPOD_HOME_TMP} && \
     cd ${GITPOD_HOME_TMP} && \
