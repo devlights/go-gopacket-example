@@ -92,6 +92,16 @@ tasks:
       - sleep 3
       - pkill webserver
       - sudo pkill http
+  applayer-dns:
+    desc: See DNS info
+    dir: cmd/applayer/dns
+    cmds:
+      - go build -o dns main.go
+      - sudo ./dns &
+      - sleep 1
+      - dig +noall google.com
+      - sleep 3
+      - sudo pkill dns
   packet:
     desc: See *pcap.Packet structure info
     dir: cmd/packet
