@@ -64,6 +64,8 @@ $ go install github.com/go-task/task/v3/cmd/task@latest
 ```sh
 $ task --list
 task: Available tasks for this project:
+* applayer-dns:             See DNS info
+* applayer-dnssec:          See DNSSEC info
 * applayer-http:            See HTTP info
 * bpffilter:                Run pcap.OpenOffline() with BPF Filter
 * default:                  default (print all ifs)
@@ -589,23 +591,42 @@ $ task applayer-dnssec
 task: [applayer-dnssec] go build -o dnssec main.go
 task: [applayer-dnssec] sudo ./dnssec &
 START
-task: [applayer-dnssec] dig +noall +dnssec whitehouse.gov
-[Src Port       ] 56674
+task: [applayer-dnssec] dig +noall +dnssec iij.ad.jp
+[Src Port       ] 51846
 [Dst Port       ] 53(domain)
-[Length         ] 63
-[Checksum       ] 4436
+[Length         ] 58
+[Checksum       ] 4431
 [DNS Questions]
-        ;whitehouse.gov.        IN       A
+        ;iij.ad.jp.     IN       A
 ------------------------------------
 [Src Port       ] 53(domain)
-[Dst Port       ] 56674
-[Length         ] 177
-[Checksum       ] 64587
+[Dst Port       ] 51846
+[Length         ] 231
+[Checksum       ] 21922
 [DNS Questions]
-        ;whitehouse.gov.        IN       A
+        ;iij.ad.jp.     IN       A
 [DNS Answers]
-        [A     ] whitehouse.gov.        134     IN      A       192.0.66.168
-        [RRSIG ] whitehouse.gov.        134     IN      RRSIG   A 13 2 300 20230608100202 20230605090202 45139 whitehouse.gov. hw/Fuk0UJltdTPt4btjWS6iOfPSHgmKFTULfigQS5unhJFkYbRViH+76FopFvBDZai6nihM5ycSufheKXhWjqQ==
+        [A     ] iij.ad.jp.     300     IN      A       202.232.2.191
+        [RRSIG ] iij.ad.jp.     300     IN      RRSIG   A 8 3 300 20230705151005 20230605151005 13308 iij.ad.jp. xxxxxxxxxxxxx
+------------------------------------
+task: [applayer-dnssec] dig +noall iij.ad.jp dnskey
+[Src Port       ] 53908
+[Dst Port       ] 53(domain)
+[Length         ] 58
+[Checksum       ] 4431
+[DNS Questions]
+        ;iij.ad.jp.     IN       DNSKEY
+------------------------------------
+[Src Port       ] 53(domain)
+[Dst Port       ] 53908
+[Length         ] 618
+[Checksum       ] 53795
+[DNS Questions]
+        ;iij.ad.jp.     IN       DNSKEY
+[DNS Answers]
+        [DNSKEY] iij.ad.jp.     2763    IN      DNSKEY  256 3 8 xxxxxxxxxxxxx
+        [DNSKEY] iij.ad.jp.     2763    IN      DNSKEY  256 3 8 xxxxxxxxxxxxx
+        [DNSKEY] iij.ad.jp.     2763    IN      DNSKEY  257 3 8 xxxxxxxxxxxxx
 ------------------------------------
 task: [applayer-dnssec] sudo pkill dnssec
 ```
@@ -619,3 +640,4 @@ task: [applayer-dnssec] sudo pkill dnssec
 - [IPが分からないオンプレミスをコマンドラインから調べる。(arp-scan)](https://qiita.com/iganari/items/7be4681ecfa5cff76feb)
 - [digコマンドを使ってみよう](https://zenn.dev/koyamaso/books/cbc1f9f136634c/viewer/d7d05e)
 - [4.5.9. DNSSEC における dig の使用](https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/7/html/security_guide/sec-security_guide-using-dig-with-dnssec)
+- [手を動かしてDNSSECの検証をやってみよう](https://eng-blog.iij.ad.jp/archives/7689)

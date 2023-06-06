@@ -113,7 +113,11 @@ tasks:
       - cmd: sleep 1
         silent: true
         # https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/7/html/security_guide/sec-security_guide-using-dig-with-dnssec
-      - dig +noall +dnssec whitehouse.gov
+      - dig +noall +dnssec iij.ad.jp
+      - cmd: sleep 3
+        silent: true
+        # https://eng-blog.iij.ad.jp/archives/7689
+      - dig +noall iij.ad.jp dnskey
       - cmd: sleep 3
         silent: true
       - sudo pkill dnssec
