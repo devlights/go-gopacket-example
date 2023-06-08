@@ -5,6 +5,43 @@ tasks:
     desc: default (print all ifs)
     cmds:
       - go run main.go
+  fmtvet:
+    desc: go fmt and go vet
+    cmds:
+      - go fmt ./...
+      - go vet ./...
+      - staticcheck ./...
+      - revive ./...
+  packet:
+    desc: See *pcap.Packet structure info
+    dir: cmd/packet
+    cmds:
+      - go build
+      - cmd: sudo bash ./app.sh
+        ignore_error: true
+      - sleep 1
+      - cmd: sudo bash ./server.sh
+        ignore_error: true
+      - cmd: sudo bash ./client.sh
+        ignore_error: true
+      - sleep 3
+      - cmd: sudo bash ./kill.sh
+        ignore_error: true
+  bpffilter:
+    desc: Run pcap.OpenOffline() with BPF Filter
+    dir: cmd/bpffilter
+    cmds:
+      - rm -rf *.pid *.pcap
+      - go build
+      - cmd: sudo bash ./tcpdump.sh
+        ignore_error: true
+      - cmd: bash ./ping.sh
+        ignore_error: true
+      - cmd: sudo bash ./kill.sh
+        ignore_error: true
+      # tcpdumpがpcapファイルを出力する猶予を与える
+      - sleep 1
+      - sudo ./bpffilter
   openlive:
     desc: Run pcap.OpenLive() example
     dir: cmd/openlive
@@ -121,40 +158,14 @@ tasks:
       - cmd: sleep 3
         silent: true
       - sudo pkill dnssec
-  packet:
-    desc: See *pcap.Packet structure info
-    dir: cmd/packet
+  applayer-dhcp:
+    desc: See DHCP info
+    dir: cmd/applayer/dhcp
     cmds:
-      - go build
-      - cmd: sudo bash ./app.sh
-        ignore_error: true
-      - sleep 1
-      - cmd: sudo bash ./server.sh
-        ignore_error: true
-      - cmd: sudo bash ./client.sh
-        ignore_error: true
-      - sleep 3
-      - cmd: sudo bash ./kill.sh
-        ignore_error: true
-  bpffilter:
-    desc: Run pcap.OpenOffline() with BPF Filter
-    dir: cmd/bpffilter
-    cmds:
-      - rm -rf *.pid *.pcap
-      - go build
-      - cmd: sudo bash ./tcpdump.sh
-        ignore_error: true
-      - cmd: bash ./ping.sh
-        ignore_error: true
-      - cmd: sudo bash ./kill.sh
-        ignore_error: true
-      # tcpdumpがpcapファイルを出力する猶予を与える
-      - sleep 1
-      - sudo ./bpffilter
-  fmtvet:
-    desc: go fmt and go vet
-    cmds:
-      - go fmt ./...
-      - go vet ./...
-      - staticcheck ./...
-      - revive ./...
+      - go build -o dhcp main.go
+      - sudo ./dhcp &
+      - cmd: sleep 1
+        silent: true
+      - cmd: sleep 3
+        silent: true
+      - sudo pkill dhcp      
