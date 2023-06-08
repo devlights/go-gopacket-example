@@ -64,6 +64,7 @@ $ go install github.com/go-task/task/v3/cmd/task@latest
 ```sh
 $ task --list
 task: Available tasks for this project:
+* applayer-dhcp:            See DHCP info
 * applayer-dns:             See DNS info
 * applayer-dnssec:          See DNSSEC info
 * applayer-http:            See HTTP info
