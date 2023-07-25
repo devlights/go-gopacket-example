@@ -168,4 +168,15 @@ tasks:
         silent: true
       - cmd: sleep 3
         silent: true
-      - sudo pkill dhcp      
+      - sudo pkill dhcp
+  applayer-ftp:
+    desc: See FTP info
+    dir: cmd/applayer/ftp
+    cmds:
+      - cmd: echo Please start the FTP server in advance.
+        silent: true
+      - go build -o gopacket-ftp main.go
+      - sudo ./gopacket-ftp &
+      - cmd: read
+        silent: true
+      - sudo pkill gopacket-ftp
