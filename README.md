@@ -630,6 +630,259 @@ task: [applayer-dnssec] dig +noall iij.ad.jp dnskey
         [DNSKEY] iij.ad.jp.     2763    IN      DNSKEY  257 3 8 xxxxxxxxxxxxx
 ------------------------------------
 task: [applayer-dnssec] sudo pkill dnssec
+
+
+$ sudo vsftpd /etc/vsftpd.conf &
+$ task applayer-ftp
+Please start the FTP server in advance.
+task: [applayer-ftp] go build -o gopacket-ftp main.go
+task: [applayer-ftp] sudo ./gopacket-ftp &
+START
+
+# ----------------------------------------------------
+# Run ftp-command in another terminal.
+#
+# $ lftp -u anonymous, anonymous@localhost
+# lftp anonymous@localhost:~> ls
+# lftp anonymous@localhost:/> bye
+# ----------------------------------------------------
+
+[Src Port       ] 52584
+[Dst Port       ] 21(ftp)
+[Seq Number     ] 3285394225
+[Ack Number     ] 0
+[Window Size    ] 43690
+[TCP Flags - SYN] true
+[TCP Flags - ACK] false
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65072
+[Urgent Pointer ] 0
+------------------------------------
+[Src Port       ] 21(ftp)
+[Dst Port       ] 52584
+[Seq Number     ] 2228490639
+[Ack Number     ] 3285394226
+[Window Size    ] 43690
+[TCP Flags - SYN] true
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65072
+[Urgent Pointer ] 0
+------------------------------------
+[Src Port       ] 52584
+[Dst Port       ] 21(ftp)
+[Seq Number     ] 3285394226
+[Ack Number     ] 2228490640
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[FTP] 220 (vsFTPd 3.0.5)
+
+------------------------------------
+[Src Port       ] 52584
+[Dst Port       ] 21(ftp)
+[Seq Number     ] 3285394226
+[Ack Number     ] 2228490660
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[FTP] FEAT
+
+------------------------------------
+[Src Port       ] 21(ftp)
+[Dst Port       ] 52584
+[Seq Number     ] 2228490660
+[Ack Number     ] 3285394232
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[FTP] 211-Features:
+
+------------------------------------
+[FTP]  EPRT
+
+------------------------------------
+[FTP]  EPSV
+
+------------------------------------
+[Src Port       ] 52584
+[Dst Port       ] 21(ftp)
+[Seq Number     ] 3285394232
+[Ack Number     ] 2228490682
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[FTP]  MDTM
+
+------------------------------------
+[FTP]  PASV
+
+------------------------------------
+[FTP]  REST STREAM
+
+------------------------------------
+[FTP]  SIZE
+
+------------------------------------
+[Src Port       ] 52584
+[Dst Port       ] 21(ftp)
+[Seq Number     ] 3285394232
+[Ack Number     ] 2228490717
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[FTP]  TVFS
+
+------------------------------------
+[FTP] 211 End
+
+------------------------------------
+[Src Port       ] 52584
+[Dst Port       ] 21(ftp)
+[Seq Number     ] 3285394232
+[Ack Number     ] 2228490731
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[FTP] AUTH TLS
+
+------------------------------------
+[FTP] 530 Please login with USER and PASS.
+
+------------------------------------
+[FTP] USER anonymous
+
+------------------------------------
+[FTP] 331 Please specify the password.
+
+------------------------------------
+[FTP] PASS 
+
+------------------------------------
+[FTP] 230 Login successful.
+
+------------------------------------
+[FTP] PWD
+
+------------------------------------
+[FTP] 257 "/" is the current directory
+
+------------------------------------
+[FTP] PASV
+
+------------------------------------
+[FTP] 227 Entering Passive Mode (127,0,0,1,209,75).
+
+------------------------------------
+[FTP] LIST
+
+------------------------------------
+[FTP] 150 Here comes the directory listing.
+
+------------------------------------
+[FTP] 226 Directory send OK.
+
+------------------------------------
+[Src Port       ] 52584
+[Dst Port       ] 21(ftp)
+[Seq Number     ] 3285394282
+[Ack Number     ] 2228490979
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[FTP] QUIT
+
+------------------------------------
+[FTP] 221 Goodbye.
+
+------------------------------------
+[Src Port       ] 21(ftp)
+[Dst Port       ] 52584
+[Seq Number     ] 2228490993
+[Ack Number     ] 3285394288
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] true
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[Src Port       ] 52584
+[Dst Port       ] 21(ftp)
+[Seq Number     ] 3285394288
+[Ack Number     ] 2228490994
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] true
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+[Src Port       ] 21(ftp)
+[Dst Port       ] 52584
+[Seq Number     ] 2228490994
+[Ack Number     ] 3285394289
+[Window Size    ] 342
+[TCP Flags - SYN] false
+[TCP Flags - ACK] true
+[TCP Flags - PSH] false
+[TCP Flags - RST] false
+[TCP Flags - FIN] false
+[Checksum       ] 65064
+[Urgent Pointer ] 0
+------------------------------------
+
+task: [applayer-ftp] sudo pkill gopacket-ftp
 ```
 
 ## REFERENCES
