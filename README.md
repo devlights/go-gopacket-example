@@ -2,7 +2,7 @@
 
 Packet Capture with gopacket example by golang.
 
-![Go Version](https://img.shields.io/badge/go-1.20-blue.svg)
+![Go Version](https://img.shields.io/badge/go-1.23-blue.svg)
 
 The sources in this repository only work on Linux.
 
