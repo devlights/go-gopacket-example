@@ -1,6 +1,6 @@
 module github.com/devlights/go-gopacket-example
 
-go 1.20
+go 1.23
 
 require (
 	github.com/devlights/gomy v0.6.0
